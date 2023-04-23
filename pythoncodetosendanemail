@@ -1,0 +1,27 @@
+###------This is the program to send an email ---------------
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+# Your email account details
+MY_EMAIL = 'youremail'
+MY_PASSWORD = 'yourpassword'
+
+# Recipient's email address
+TO_EMAIL = 'kcajmal3@gmail.com'
+
+# Create the message object
+msg = MIMEMultipart()
+msg['From'] = MY_EMAIL
+msg['To'] = TO_EMAIL
+msg['Subject'] = 'Test Email from Python'
+
+# Add message body
+body = 'This is a test email sent from Python'
+msg.attach(MIMEText(body, 'plain'))
+
+# Create SMTP session
+with smtplib.SMTP_SSL('smtp.cerom.org', 465) as smtp:
+    smtp.login(MY_EMAIL, MY_PASSWORD)
+    smtp.send_message(msg)
+
